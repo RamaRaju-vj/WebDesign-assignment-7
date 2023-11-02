@@ -1,10 +1,24 @@
-
-const app = document.getElementById('app');
 const label = document.getElementById('label');
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const resetButton = document.getElementById('reset');
+const datePicker = document.getElementById('date');
+const currentDateLabel = document.getElementById('current-date');
 
+
+function updateCurrentDate() {
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().slice(0, 10); 
+  currentDateLabel.textContent = `Current Date: ${formattedDate}`;
+}
+
+
+function updateCurrentDateContinuously() {
+  updateCurrentDate(); 
+  setInterval(updateCurrentDate, 1000); 
+}
+
+updateCurrentDateContinuously(); 
 let timer;
 let startTime;
 
@@ -41,6 +55,10 @@ stopButton.addEventListener('click', () => {
 resetButton.addEventListener('click', () => {
   startTime = null;
   label.textContent = '00:00:00';
+});
+
+datePicker.addEventListener('change', () => {
+  
 });
 
 function formatTime(ms) {
